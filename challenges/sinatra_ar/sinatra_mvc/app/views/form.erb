@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Input Your Birthday</title>
+</head>
+<body>
+<% if !@error.nil? %>
+  <p><%= @error %></p>
+<% end %>
+<!-- <h1>Hello Spiritual Seeker!</h1> -->
+<div class="row">
+<div class="col-md-4">
+<h4>Please input your name and birthdate to get your numerological
+birthpath!</h4>
+<br>
+<p>
+The birth path number, which suggests your overall path in life and
+place in the world, is based on your complete birth date.  It is easy
+to calculate.  Simply add up the digits of your birth date, and keep
+reducing until you get a single digit.  
+</p>
+</div>
+<form class="col-md-3" action="/" method="post">
+<div class="form-group">
+<label for="name">Enter your name</label>
+<input type="text" name="name"> 
+<br><br>
+<label for="birthdate">Enter your birthdate [MMDDYYYY]</label>
+<!-- <input class="form-control" name="birthdate" type="date" /> -->
+<input type="text" name="birthdate">
+<input class="btn btn-default" type="submit">
+</form>
+</div>
+</p>
+</body>
+</html>
