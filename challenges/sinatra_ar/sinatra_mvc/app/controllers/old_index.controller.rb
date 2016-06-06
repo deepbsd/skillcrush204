@@ -4,9 +4,8 @@
 #  number is a single digit.  Read all about it at
 #  https://cafeastrology.com/numerology.html
 
-#require 'sinatra'
+require 'sinatra'
 
-=begin
 # move to person.rb
 def get_birthpath_num(date)
     # Derives the birthpath number from the birthdate
@@ -60,13 +59,12 @@ def valid_birthdate(input)
         return false
     end
 end
-=end
 
 def setup_index_view
     birthdate = params[:birthdate]
     name = params[:name]
-    path_num = Person.get_birthpath_num(birthdate)
-    @message = Person.get_message(path_num)
+    path_num = get_birthpath_num(birthdate)
+    @message = get_message(path_num)
     #"<h3>Hello #{name}!<br>#{@message}</h3>"  # Personalized display.  This one won't pass the test
     #"#{@message}"     # won't pass test...
     erb :index        # use to pass tests
@@ -80,8 +78,8 @@ end
 
 post '/' do
     birthdate = params[:birthdate].gsub('-','')
-    if Person.valid_birthdate(birthdate)
-        birthpath_num = Person.get_birthpath_num(birthdate)
+    if valid_birthdate(birthdate)
+        birthpath_num = get_birthpath_num(birthdate)
         redirect "/message/#{birthpath_num}"
     else
         @error = "Oops! You should enter a valid birthdate in the form of mmddyyyy. Try again!"
@@ -99,7 +97,7 @@ end
 
 get '/message/:birth_path_num' do
     birthpath_num = params[:birth_path_num].to_i
-    @message = Person.get_message(birthpath_num)
+    @message = get_message(birthpath_num)
     erb :index
 end
 

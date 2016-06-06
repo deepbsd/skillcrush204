@@ -4,7 +4,7 @@
 #  number is a single digit.  Read all about it at
 #  https://cafeastrology.com/numerology.html
 
-#require 'sinatra'
+require 'sinatra'
 
 =begin
 # move to person.rb

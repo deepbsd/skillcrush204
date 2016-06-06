@@ -13,7 +13,7 @@ class Person < ActiveRecord::Base
       	return number
     end
 
-  # Return correct @message value based on num paremeterßß
+  # Return correct @message value based on num paremeter
   def self.get_message(num)
       case num
       when 1
