@@ -52,31 +52,24 @@ def get_message(num)
     end
 end
 
-# validate input  (moved to person.rb)
-def valid_birthdate(input)
-    if input.match(/^[0-9]{8}$/)
-        return true
-    else
-        return false
-    end
-end
 =end
 
-def setup_index_view
-    birthdate = params[:birthdate]
-    name = params[:name]
-    path_num = Person.get_birthpath_num(birthdate)
-    @message = Person.get_message(path_num)
-    #"<h3>Hello #{name}!<br>#{@message}</h3>"  # Personalized display.  This one won't pass the test
-    #"#{@message}"     # won't pass test...
-    erb :index        # use to pass tests
+
+get '/:birthdate' do
+    setup_index_view
 end
 
+get '/message/:birth_path_num' do
+    birthpath_num = params[:birth_path_num].to_i
+    @message = Person.get_message(birthpath_num)
+    erb :index
+end
 
 
 get '/' do
     erb :form
 end
+
 
 post '/' do
     birthdate = params[:birthdate].gsub('-','')
@@ -90,17 +83,24 @@ post '/' do
 end
 
 
+def setup_index_view
+    birthdate = params[:birthdate]
+    name = params[:name]
+    path_num = Person.get_birthpath_num(birthdate)
+    @message = Person.get_message(path_num)
+    #"<h3>Hello #{name}!<br>#{@message}</h3>"  # Personalized display.  This one won't pass the test
+    #"#{@message}"     # won't pass test...
+    erb :index        # use to pass tests
+end
+
+
+
+
+
 
 =begin
 post '/' do
     setup_index_view
-end
-=end
-
-get '/message/:birth_path_num' do
-    birthpath_num = params[:birth_path_num].to_i
-    @message = Person.get_message(birthpath_num)
-    erb :index
 end
 
 get '/newpage' do
@@ -124,8 +124,5 @@ Birth Year is 1968 = 1968.</p>
 '
     erb :newpage
 end
+=end
 
-
-get '/:birthdate' do
-    setup_index_view
-end

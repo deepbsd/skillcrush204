@@ -4,20 +4,11 @@ get '/people/' do
     erb :"/people/index"
 end
 
-get '/' do
-    @people = Person.all
-    erb :"/people/index"
-end
-
-get '/new' do
-    erb :"/people/new"
-end
-
 get '/people/new' do
     erb :"/people/new"
 end
 
-post '/people/new' do
+post '/people' do
     if params[:birthdate].include?("-")
         birthdate = params[:birthdate]
     else
@@ -27,9 +18,25 @@ post '/people/new' do
     redirect "/people/#{person.id}"
 end
 
-get '/:id' do
+get '/people/:id/edit' do
     @person = Person.find(params[:id])
-    erb :"/people/show"
+    erb :"/people/edit"
+end
+
+
+put '/people/:id' do
+    person = Person.find(params[:id])
+    person.first_name = params[:first_name]
+    person.last_name = params[:last_name]
+    person.birthdate = params[:birthdate]
+    person.save
+    redirect "/people/#{person.id}"
+end
+
+delete '/people/:id' do
+    person = Person.find(params[:id])
+    person.delete
+    redirect "/people"
 end
 
 get '/people/:id' do
@@ -39,3 +46,19 @@ get '/people/:id' do
     @message = Person.get_message(birthpath_num)
     erb :"/people/show"
 end
+
+=begin
+get '/' do
+    @people = Person.all
+    erb :"/people/index"
+end
+
+get '/new' do
+    erb :"/people/new"
+end
+
+get '/:id' do
+    @person = Person.find(params[:id])
+    erb :"/people/show"
+end
+=end

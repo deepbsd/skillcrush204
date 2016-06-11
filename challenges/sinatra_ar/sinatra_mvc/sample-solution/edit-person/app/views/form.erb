@@ -1,0 +1,8 @@
+<% if !@error.nil? %>
+  <p><%= @error %></p>
+<% end %>
+<form action="/" method="post">
+  <label for="birthdate">Enter your birthdate</label>
+  <input type="date" name="birthdate" />
+  <input type="submit" />
+</form>
