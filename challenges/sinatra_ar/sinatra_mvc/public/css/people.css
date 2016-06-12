@@ -1,0 +1,47 @@
+table {
+color: #333;
+width: 70%;
+border-collapse: collapse;
+border-spacing: 0;
+}
+
+#person {
+font-family: 'Lora', serif;
+font-size: 35px;
+color: purple;
+}
+
+#bdate {
+font-family: 'Lato', sans-serif;
+font-size: 22px;
+}
+
+#mesg {
+font-family: 'Lato', sans-serif;
+font-size: 16px;
+font-style: italic;
+}
+
+
+td, th { text-align: center; border: 1px solid #CCC; height: 30px; }
+
+th {
+background #F3F3F3;
+font-weight: bold;
+}
+
+td {
+background: #FAFAFA;
+text-align: center;
+}
+
+.new-person {
+  padding: 20px;
+  background-color: #efefef;
+}
+
+.edit-person {
+  padding: 20px;
+  background-color: #add8e6;
+}
+
