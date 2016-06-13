@@ -1,24 +1,20 @@
 #!/usr/bin/ruby
 
-require_relative 'reverse_letters'
 
 def find_anagram(word)
-    if word.kind_of?(String) and word.length == 3
-        anagram_array = Array.new()
-        new_array = word.split('').permutation.to_a
-	new_array.each do |str|
-	    anagram_array << str.join()
-	end
+    word_length = 3
+    if word.kind_of?(String) and word.length <= word_length
+        anagram_array = word.split('').permutation.to_a.map{|w| w.join}
 	return anagram_array
     else
-        puts "String of exactly 3 letters, please."
+        puts "Error: String must be not greater than #{word_length}"
     end
 end
 
 =begin
-words = ["one", "two", "the"]
-
-words.each do |w|
-    puts find_anagram(w)
+words = ["one", "two", "four", "five", "three", "abc"]
+words.each do |word|
+    array = find_anagram(word)
+    array.each {|w| print w+' '}
 end
 =end
