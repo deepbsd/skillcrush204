@@ -13,7 +13,8 @@ post '/people' do
     if params[:birthdate].include?("-")
         birthdate = params[:birthdate]
     else
-        birthdate = Date.strptime(params[:birthdate], "%m%d%Y")
+        birthdate = Date.strptime(params[:birthdate], "%m%d%Y") if !params[:birthdate].empty?
+        #birthdate = Date.strptime(params[:birthdate], "%m%d%Y") 
     end
     @person = Person.new(first_name: params[:first_name], last_name: params[:last_name], birthdate: birthdate)
     if @person.valid?
@@ -40,7 +41,7 @@ put '/people/:id' do
     @person.last_name = params[:last_name]
     @person.birthdate = params[:birthdate]
     if @person.valid?
-        person.save
+        @person.save
         redirect "/people/#{@person.id}"
     else
         @person.errors.full_messages.each do |msg|
